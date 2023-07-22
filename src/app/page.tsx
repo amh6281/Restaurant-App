@@ -1,10 +1,12 @@
 import Slider from "@/components/Slider";
 import Image from "next/image";
+import Featured from "@/components/Featured";
 
 export default function Home() {
   return (
-    <main>
+    <main className="overflow-x-hidden">
       <Slider />
+      <Featured />
     </main>
   );
 }
