@@ -2,7 +2,7 @@
 
 import { featuredProducts } from "@/data";
 import Image from "next/image";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 const Featured = () => {
   const [slideIndex, setSlideIndex] = useState(0);
@@ -19,15 +19,26 @@ const Featured = () => {
     );
   };
 
+  // SSR에서 사용할 수 없는 window 객체를 사용하는 방법
   const getTranslateValue = () => {
-    if (window.innerWidth >= 1280) {
-      return slideIndex * -25;
-    } else if (window.innerWidth >= 768) {
-      return slideIndex * -50;
-    } else {
-      return slideIndex * -100;
+    if (typeof window !== "undefined") {
+      return window.innerWidth >= 1280
+        ? slideIndex * -25
+        : window.innerWidth >= 768
+        ? slideIndex * -50
+        : slideIndex * -100;
     }
   };
+
+  useEffect(() => {
+    const handleResize = () => {
+      setSlideIndex(0); // window 크기 변경 시 slide reset
+    };
+    window.addEventListener("resize", handleResize);
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
 
   return (
     <div className="w-screen overflow-hidden text-red-500">
@@ -60,7 +71,7 @@ const Featured = () => {
               <p className="p-4 2xl:p-8">{item.desc}</p>
               <span className="text-xl font-bold">${item.price}</span>
               <button className="bg-red-500 text-white p-2 rounded-md">
-                Add to Cart
+                장바구니 추가
               </button>
             </div>
           </div>

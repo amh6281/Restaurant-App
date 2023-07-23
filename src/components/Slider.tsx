@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import Link from "next/link";
 import React, { useEffect, useState } from "react";
 
 const data = [
@@ -39,7 +40,9 @@ const Slider = () => {
         <h1 className="text-5xl text-center p-4 leading-tight md:p-10 md:text-6xl lg:leading-relaxed">
           {data[currentSlide].title}
         </h1>
-        <button className="bg-red-500 text-white py-4 px-8">주문하기</button>
+        <Link href="/menu">
+          <button className="bg-red-500 text-white py-4 px-8">주문하기</button>
+        </Link>
       </div>
 
       {/* Image Container */}
