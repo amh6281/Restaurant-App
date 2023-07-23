@@ -69,7 +69,9 @@ const Featured = () => {
                 {item.title}
               </h1>
               <p className="p-4 2xl:p-8">{item.desc}</p>
-              <span className="text-xl font-bold">${item.price}</span>
+              <span className="text-xl font-bold">
+                {item.price.toLocaleString()}₩
+              </span>
               <button className="bg-red-500 text-white p-2 rounded-md">
                 장바구니 추가
               </button>
