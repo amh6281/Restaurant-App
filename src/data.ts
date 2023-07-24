@@ -200,3 +200,39 @@ export const featuredProducts: Products = [
     ],
   },
 ];
+
+type Menu = {
+  id: number;
+  slug: string;
+  title: string;
+  desc?: string;
+  img?: string;
+  color: string;
+}[];
+
+export const menu: Menu = [
+  {
+    id: 1,
+    slug: "pastas",
+    title: "이탈리아 파스타",
+    desc: "Savor the taste of perfection with our exquisite Italian handmade pasta menu.",
+    img: "/temporary/m1.png",
+    color: "white",
+  },
+  {
+    id: 2,
+    slug: "burgers",
+    title: "수제 햄버거",
+    desc: "Burger Bliss: Juicy patties, bold flavors, and gourmet toppings galore.",
+    img: "/temporary/m2.png",
+    color: "black",
+  },
+  {
+    id: 3,
+    slug: "pizzas",
+    title: "수제 피자",
+    desc: "Pizza Paradise: Irresistible slices, mouthwatering toppings, and cheesy perfection.",
+    img: "/temporary/m3.png",
+    color: "white",
+  },
+];
