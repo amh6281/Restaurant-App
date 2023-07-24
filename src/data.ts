@@ -236,3 +236,132 @@ export const menu: Menu = [
     color: "white",
   },
 ];
+
+export const pizzas: Products = [
+  {
+    id: 1,
+    title: "콤비네이션",
+    desc: "Ignite your taste buds with a fiery combination of spicy pepperoni, jalapeños, crushed red pepper flakes, and melted mozzarella cheese, delivering a kick with every bite.",
+    img: "/temporary/p1.png",
+    price: 19000,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 4000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 6000,
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "치즈 피자",
+    desc: "Embark on a culinary journey with this Mediterranean-inspired creation, featuring zesty feta cheese, Kalamata olives, sun-dried tomatoes, and a sprinkle of oregano.",
+    img: "/temporary/p8.png",
+    price: 12900,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 2000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 4000,
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "나폴리 피자",
+    desc: "A classic Italian delight featuring a thin, crispy crust, tangy tomato sauce, fresh mozzarella, and a medley of aromatic herbs topped with lettuce, tomatoes, and a dollop of tangy mayo.",
+    img: "/temporary/p3.png",
+    price: 24900,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 4000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 6000,
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "야채 피자",
+    desc: "A classic Italian delight featuring a thin, crispy crust, tangy tomato sauce, fresh mozzarella, and a medley of aromatic herbs topped with lettuce, tomatoes, and a dollop of tangy mayo.",
+    img: "/temporary/p10.png",
+    price: 21900,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 2000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 4000,
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "슈퍼슈프림 피자",
+    desc: "A classic Italian delight featuring a thin, crispy crust, tangy tomato sauce, fresh mozzarella, and a medley of aromatic herbs topped with lettuce, tomatoes, and a dollop of tangy mayo.",
+    img: "/temporary/p11.png",
+    price: 24900,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 3000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 5000,
+      },
+    ],
+  },
+  {
+    id: 6,
+    title: "치즈 판타지 콰트로",
+    desc: "Experience pure cheesy bliss with a melty blend of mozzarella, cheddar, provolone, and Parmesan cheeses, creating a rich and indulgent pizza experience.",
+    img: "/temporary/p12.png",
+    price: 28900,
+    options: [
+      {
+        title: "Small",
+        additionalPrice: 0,
+      },
+      {
+        title: "Medium",
+        additionalPrice: 4000,
+      },
+      {
+        title: "Large",
+        additionalPrice: 6000,
+      },
+    ],
+  },
+];
