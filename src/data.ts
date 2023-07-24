@@ -365,3 +365,25 @@ export const pizzas: Products = [
     ],
   },
 ];
+
+export const singleProduct: Product = {
+  id: 1,
+  title: "콤비네이션",
+  desc: "Ignite your taste buds with a fiery combination of spicy pepperoni, jalapeños, crushed red pepper flakes, and melted mozzarella cheese, delivering a kick with every bite.",
+  img: "/temporary/p1.png",
+  price: 19000,
+  options: [
+    {
+      title: "Small",
+      additionalPrice: 0,
+    },
+    {
+      title: "Medium",
+      additionalPrice: 4000,
+    },
+    {
+      title: "Large",
+      additionalPrice: 6000,
+    },
+  ],
+};
