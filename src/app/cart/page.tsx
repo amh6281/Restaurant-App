@@ -9,7 +9,7 @@ const CartPage = () => {
         {/* Single Item */}
         <div className="flex items-center justify-between mb-4">
           <Image src="/temporary/p1.png" alt="" width={100} height={100} />
-          <div className="">
+          <div>
             <h1 className="text-xl font-bold">콤비네이션</h1>
             <span>Large</span>
           </div>
@@ -19,7 +19,7 @@ const CartPage = () => {
         {/* Single Item */}
         <div className="flex items-center justify-between mb-4">
           <Image src="/temporary/p1.png" alt="" width={100} height={100} />
-          <div className="">
+          <div>
             <h1 className="text-xl font-bold">콤비네이션</h1>
             <span>Large</span>
           </div>
@@ -29,7 +29,7 @@ const CartPage = () => {
         {/* Single Item */}
         <div className="flex items-center justify-between mb-4">
           <Image src="/temporary/p1.png" alt="" width={100} height={100} />
-          <div className="">
+          <div>
             <h1 className="text-xl font-bold">콤비네이션</h1>
             <span>Large</span>
           </div>
@@ -40,16 +40,16 @@ const CartPage = () => {
       {/* Payment Container */}
       <div className="h-1/2 p-4 bg-fuchsia-50 flex flex-col gap-4 justify-center lg:h-full lg:w-1/3 2xl:w-1/2 lg:px-20 xl:px-40 2xl:text-xl 2xl:gap-6">
         <div className="flex justify-between">
-          <span className="">주문금액</span>
-          <span className="">56,700₩</span>
+          <span>주문금액</span>
+          <span>56,700₩</span>
         </div>
         <div className="flex justify-between">
-          <span className="">배달요금</span>
+          <span>배달요금</span>
           <span className="text-green-500">0₩</span>
         </div>
         <hr className="my-2" />
         <div className="flex justify-between">
-          <span className="">총 주문금액</span>
+          <span>총 주문금액</span>
           <span className="font-bold">56,700₩</span>
         </div>
         <button className="bg-red-500 text-white p-3 rounded-md w-1/2 self-end">
