@@ -1,8 +1,5 @@
-import { PrismaClient } from "@prisma/client";
+import { prisma } from "@/utils/connect";
 import { NextResponse } from "next/server";
-
-// JS를 이용해 prisma의 DB 작업 관리를 위한 PrismaClient
-const prisma = new PrismaClient();
 
 // Fetch All Categories
 export const GET = async () => {
