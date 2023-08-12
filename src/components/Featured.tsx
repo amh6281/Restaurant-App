@@ -1,11 +1,32 @@
 "use client";
 
-import { featuredProducts } from "@/data";
+import { ProductType } from "@/types/types";
 import Image from "next/image";
 import React, { useEffect, useState } from "react";
 
+const getData = async () => {
+  return fetch("http://localhost:3000/api/products", {
+    cache: "no-store",
+  })
+    .then((res) => {
+      if (!res.ok) {
+        throw new Error("실패");
+      }
+      return res.json();
+    })
+    .catch((error) => {
+      console.error(error);
+      return [];
+    });
+};
+
 const Featured = () => {
+  const [featuredProducts, setFeaturedProducts] = useState<ProductType[]>([]);
   const [slideIndex, setSlideIndex] = useState(0);
+
+  useEffect(() => {
+    getData().then((data) => setFeaturedProducts(data));
+  }, []);
 
   const handleNextSlide = () => {
     setSlideIndex((prevIndex) =>
@@ -27,6 +48,9 @@ const Featured = () => {
         : window.innerWidth >= 768
         ? slideIndex * -50
         : slideIndex * -100;
+    } else {
+      // 서버 사이드 렌더링 시에는 고정된 값 사용
+      return 0;
     }
   };
 
