@@ -1,4 +1,4 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, getServerSession } from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
 
 export const authOptions: NextAuthOptions = {
@@ -9,3 +9,6 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
 };
+
+// Server Component 위한 getServerSession
+export const getAuthSession = () => getServerSession(authOptions);
