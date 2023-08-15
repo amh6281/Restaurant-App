@@ -1,8 +1,28 @@
 "use client"; // 검색엔진 X, Status 변경 함수
 
 import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { OrderType } from "@/types/types";
+import { useSession } from "next-auth/react";
+import { useRouter } from "next/navigation";
 
 const OrdersPage = () => {
+  const { data: session, status } = useSession();
+
+  const router = useRouter();
+
+  if (status === "unauthenticated") {
+    router.push("/");
+  }
+
+  const { isLoading, error, data } = useQuery({
+    queryKey: ["orders"],
+    queryFn: () =>
+      fetch("http://localhost:3000/api/orders").then((res) => res.json()),
+  });
+
+  if (isLoading || status === "loading") return "Loading...";
+
   return (
     <div className="p-4 lg:px-20 xl:px-40">
       <table className="w-full border-separate border-spacing-3">
@@ -16,33 +36,19 @@ const OrdersPage = () => {
           </tr>
         </thead>
         <tbody>
-          <tr className="text-sm md:text-base bg-red-50">
-            <td className="hidden md:block py-6 px-1">4135135131</td>
-            <td className="py-6 px-1">2023년 07월 25일 16:55</td>
-            <td className="py-6 px-1">32,900원</td>
-            <td className="hidden md:block py-6 px-1">
-              불고기피자, 새우버거, 콜라 1L
-            </td>
-            <td className="py-6 px-1">배달중...</td>
-          </tr>
-          <tr className="text-sm md:text-base odd:bg-gray-100">
-            <td className="hidden md:block py-6 px-1">4135135131</td>
-            <td className="py-6 px-1">2023년 07월 25일 16:55</td>
-            <td className="py-6 px-1">32,900원</td>
-            <td className="hidden md:block py-6 px-1">
-              불고기피자, 새우버거, 콜라 1L
-            </td>
-            <td className="py-6 px-1">배달중...</td>
-          </tr>
-          <tr className="text-sm md:text-base odd:bg-gray-100">
-            <td className="hidden md:block py-6 px-1">4135135131</td>
-            <td className="py-6 px-1">2023년 07월 25일 16:55</td>
-            <td className="py-6 px-1">32,900원</td>
-            <td className="hidden md:block py-6 px-1">
-              불고기피자, 새우버거, 콜라 1L
-            </td>
-            <td className="py-6 px-1">배달중...</td>
-          </tr>
+          {data.map((item: OrderType) => (
+            <tr className="text-sm md:text-base bg-red-50" key={item.id}>
+              <td className="hidden md:block py-6 px-1">{item.id}</td>
+              <td className="py-6 px-1">
+                {item.createdAt.toString().slice(0, 10)}
+              </td>
+              <td className="py-6 px-1">{item.price.toLocaleString()}원</td>
+              <td className="hidden md:block py-6 px-1">
+                {item.products[0].title}
+              </td>
+              <td className="py-6 px-1">{item.status}...</td>
+            </tr>
+          ))}
         </tbody>
       </table>
     </div>
