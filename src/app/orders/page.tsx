@@ -1,3 +1,5 @@
+"use client"; // 검색엔진 X, Status 변경 함수
+
 import React from "react";
 
 const OrdersPage = () => {

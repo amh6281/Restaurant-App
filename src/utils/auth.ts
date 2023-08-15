@@ -20,7 +20,7 @@ declare module "next-auth/jwt" {
 export const authOptions: NextAuthOptions = {
   adapter: PrismaAdapter(prisma),
   session: {
-    strategy: "jwt", // jwt 사용
+    strategy: "jwt", // session을 jwt를 사용하여 관리
   },
   providers: [
     GoogleProvider({
@@ -29,20 +29,25 @@ export const authOptions: NextAuthOptions = {
     }),
   ],
   callbacks: {
-    // 세션 인증 처리
+    // useSession or getServerSession 등 저장된 세션정보 확인할 때 호출
     async session({ token, session }) {
+      // 사용자의 JWT 토큰이 존재한다면
       if (token) {
+        // 사용자의 JWT 토큰에 있는 isAdmin property를 session 객체에 user 정보에 추가
         session.user.isAdmin = token.isAdmin;
       }
+      // 수정된 session 반환
       return session;
     },
-    // JWT 토큰 처리, 로그인 후 JWT 토큰 생성 및 변환
+
+    // JWT 생성(로그인) or 업데이트 될 때마다 호출
     async jwt({ token }) {
       const userInDb = await prisma.user.findUnique({
         where: {
           email: token.email!,
         },
       });
+      // userInDb를 통해 user 정보 조회 후 관리자 여부 정보를 토큰 객체의 isAdmin property에 할당
       token.isAdmin = userInDb?.isAdmin!;
       return token;
     },
