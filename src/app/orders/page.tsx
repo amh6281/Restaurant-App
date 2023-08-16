@@ -6,6 +6,7 @@ import { OrderType } from "@/types/types";
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { toast } from "react-toastify";
 
 const OrdersPage = () => {
   const { data: session, status } = useSession();
@@ -46,6 +47,7 @@ const OrdersPage = () => {
     const status = input.value;
 
     mutation.mutate({ id, status });
+    toast.success("주문 상태가 업데이트되었습니다!");
   };
 
   if (isLoading || status === "loading") return "Loading...";
@@ -64,7 +66,10 @@ const OrdersPage = () => {
         </thead>
         <tbody>
           {data.map((item: OrderType) => (
-            <tr className="text-sm md:text-base bg-red-50" key={item.id}>
+            <tr
+              className={`${item.status !== "배달완료" && "bg-red-50"}`}
+              key={item.id}
+            >
               <td className="hidden md:block py-6 px-1">{item.id}</td>
               <td className="py-6 px-1">
                 {item.createdAt.toString().slice(0, 10)}
