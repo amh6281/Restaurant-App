@@ -1,42 +1,41 @@
 "use client";
 
+import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
 
-type Props = {
-  price: number;
-  id: number;
-  options?: { title: string; additionalPrice: number }[];
-};
-
-const Price = ({ price, id, options }: Props) => {
-  const [totalPrice, setTotalPrice] = useState(price);
+const Price = ({ product }: { product: ProductType }) => {
+  const [totalPrice, setTotalPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
 
   useEffect(() => {
     setTotalPrice(
-      quantity * (options ? price + options[selected].additionalPrice : price)
+      quantity *
+        (product.options?.length
+          ? product.price + product.options[selected].additionalPrice
+          : product.price)
     );
-  }, [quantity, selected, options, price]);
+  }, [quantity, selected, product]);
 
   return (
     <div className="flex flex-col gap-4">
       <h2 className="text-2xl font-bold">{totalPrice.toLocaleString()}₩</h2>
       {/* Options Container */}
       <div className="flex gap-4">
-        {options?.map((option, index) => (
-          <button
-            key={option.title}
-            className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
-            style={{
-              background: selected === index ? "rgb(248 133 133)" : "white",
-              color: selected === index ? "white" : "red",
-            }}
-            onClick={() => setSelected(index)}
-          >
-            {option.title}
-          </button>
-        ))}
+        {product.options?.length &&
+          product.options?.map((option, index) => (
+            <button
+              key={option.title}
+              className="min-w-[6rem] p-2 ring-1 ring-red-400 rounded-md"
+              style={{
+                background: selected === index ? "rgb(248 133 133)" : "white",
+                color: selected === index ? "white" : "red",
+              }}
+              onClick={() => setSelected(index)}
+            >
+              {option.title}
+            </button>
+          ))}
       </div>
 
       {/* Quantity and Button Container */}
