@@ -2,10 +2,15 @@
 
 import { useCartStore } from "@/utils/store";
 import Image from "next/image";
-import React from "react";
+import React, { useEffect } from "react";
 
 const CartPage = () => {
   const { products, totalPrice, removeFromCart } = useCartStore();
+
+  // useCartStore의 상태를 이전에 저장한 상태로 복원
+  useEffect(() => {
+    useCartStore.persist.rehydrate();
+  }, []);
 
   return (
     <div className="h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex flex-col text-red-500 lg:flex-row">
