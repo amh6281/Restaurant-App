@@ -23,7 +23,9 @@ const CartPage = () => {
               <Image src={item.img} alt="" width={100} height={100} />
             )}
             <div>
-              <h1 className="text-xl font-bold">{item.title}</h1>
+              <h1 className="text-xl font-bold">
+                {item.title} x {item.quantity}
+              </h1>
               <span>{item.optionTitle}</span>
             </div>
             <h2 className="font-bold">{item.price}₩</h2>
