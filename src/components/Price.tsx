@@ -2,11 +2,15 @@
 
 import { ProductType } from "@/types/types";
 import React, { useEffect, useState } from "react";
+import { useCartStore } from "@/utils/store";
+import { toast } from "react-toastify";
 
 const Price = ({ product }: { product: ProductType }) => {
   const [totalPrice, setTotalPrice] = useState(product.price);
   const [quantity, setQuantity] = useState(1);
   const [selected, setSelected] = useState(0);
+
+  const { addToCart } = useCartStore();
 
   useEffect(() => {
     setTotalPrice(
@@ -16,6 +20,20 @@ const Price = ({ product }: { product: ProductType }) => {
           : product.price)
     );
   }, [quantity, selected, product]);
+
+  const handleCart = () => {
+    addToCart({
+      id: product.id,
+      title: product.title,
+      img: product.img,
+      price: totalPrice,
+      ...(product.options?.length && {
+        optionTitle: product.options[selected].title,
+      }),
+      quantity: quantity,
+    });
+    toast.success("장바구니에 추가하였습니다.");
+  };
 
   return (
     <div className="flex flex-col gap-4">
@@ -56,7 +74,10 @@ const Price = ({ product }: { product: ProductType }) => {
             </button>
           </div>
         </div>
-        <button className="w-56 bg-red-500 text-white p-3 ring-1 ring-red-500">
+        <button
+          className="w-56 bg-red-500 text-white p-3 ring-1 ring-red-500"
+          onClick={handleCart}
+        >
           장바구니 추가
         </button>
       </div>
