@@ -1,14 +1,17 @@
 import { prisma } from "@/utils/connect";
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 
 const stripe = require("stripe")(process.env.STRIPE_SECRET_KEY);
 
-export const POST = async ({ params }: { params: { id: string } }) => {
-  const { id } = params;
+export async function POST(
+  request: NextRequest,
+  { params }: { params: { orderId: string } }
+) {
+  const { orderId } = params;
 
   const order = await prisma.order.findUnique({
     where: {
-      id: id,
+      id: orderId,
     },
   });
 
@@ -16,14 +19,14 @@ export const POST = async ({ params }: { params: { id: string } }) => {
     const paymentIntent = await stripe.paymentIntents.create({
       amount: 100 * 100,
       currency: "usd",
-      automatic_payment_method: {
+      automatic_payment_methods: {
         enabled: true,
       },
     });
 
     await prisma.order.update({
       where: {
-        id: id,
+        id: orderId,
       },
       data: { intent_id: paymentIntent.id },
     });
@@ -40,4 +43,4 @@ export const POST = async ({ params }: { params: { id: string } }) => {
       }
     );
   }
-};
+}
