@@ -2,9 +2,21 @@
 
 import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import React from "react";
+import React, { useState } from "react";
 
 const AddPage = () => {
+  const [inputs, setInputs] = useState({
+    title: "",
+    desc: "",
+    price: 0,
+    catSlug: 0,
+  });
+
+  const [option, setOption] = useState({
+    title: "",
+    additionalPrice: 0,
+  });
+
   const { data: session, status } = useSession();
   const router = useRouter();
 
@@ -16,6 +28,14 @@ const AddPage = () => {
     router.push("/");
   }
 
+  const handleChange = (
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
+    setInputs((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
   return (
     <div>
       <form className="shadow-lg flex flex-wrap gap-4 p-8">
@@ -23,6 +43,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2">
           <label>제목</label>
           <input
+            onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="text"
             name="title"
@@ -31,6 +52,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2">
           <label>설명</label>
           <textarea
+            onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             name="desc"
           />
@@ -38,6 +60,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2">
           <label>가격</label>
           <input
+            onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="number"
             name="price"
@@ -46,6 +69,7 @@ const AddPage = () => {
         <div className="w-full flex flex-col gap-2">
           <label>카테고리</label>
           <input
+            onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="text"
             name="category"
