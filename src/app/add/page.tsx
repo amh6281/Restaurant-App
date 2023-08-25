@@ -36,6 +36,12 @@ const AddPage = () => {
     });
   };
 
+  const changeOption = (e: React.ChangeEvent<HTMLInputElement>) => {
+    setOption((prev) => {
+      return { ...prev, [e.target.name]: e.target.value };
+    });
+  };
+
   return (
     <div>
       <form className="shadow-lg flex flex-wrap gap-4 p-8">
@@ -79,12 +85,14 @@ const AddPage = () => {
           <label>옵션</label>
           <div>
             <input
+              onChange={changeOption}
               className="ring-1 ring-red-200 p-2 rounded-sm"
               type="text"
               placeholder="Title"
               name="title"
             />
             <input
+              onChange={changeOption}
               className="ring-1 ring-red-200 p-2 rounded-sm"
               type="number"
               placeholder="Additional Price"
