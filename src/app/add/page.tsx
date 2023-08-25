@@ -4,18 +4,32 @@ import { useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
+type Inputs = {
+  title: string;
+  desc: string;
+  price: number;
+  catSlug: string;
+};
+
+type Option = {
+  title: string;
+  additionalPrice: number;
+};
+
 const AddPage = () => {
-  const [inputs, setInputs] = useState({
+  const [inputs, setInputs] = useState<Inputs>({
     title: "",
     desc: "",
     price: 0,
-    catSlug: 0,
+    catSlug: "",
   });
 
-  const [option, setOption] = useState({
+  const [option, setOption] = useState<Option>({
     title: "",
     additionalPrice: 0,
   });
+
+  const [options, setOptions] = useState<Option[]>([]);
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -99,13 +113,23 @@ const AddPage = () => {
               name="additionalPrice"
             />
           </div>
-          <button className="w-52 bg-red-500 text-white p-2">추가</button>
+          <div
+            className="w-52 bg-red-500 text-white p-2"
+            onClick={() => setOptions((prev) => [...prev, option])}
+          >
+            추가
+          </div>
         </div>
         <div>
-          <div className="ring-1 p-2 ring-red-500 rounded-md cursor-pointer">
-            <span>Small</span>
-            <span>2,000</span>
-          </div>
+          {options.map((item) => (
+            <div
+              className="ring-1 p-2 ring-red-500 rounded-md cursor-pointer"
+              key={item.title}
+            >
+              <span>{item.title}</span>
+              <span>{item.additionalPrice}</span>
+            </div>
+          ))}
         </div>
         <button type="submit" className="p-2 w-full bg-red-500 text-white">
           추가
