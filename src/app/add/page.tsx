@@ -121,13 +121,18 @@ const AddPage = () => {
           </div>
         </div>
         <div>
-          {options.map((item) => (
+          {options.map((opt) => (
             <div
               className="ring-1 p-2 ring-red-500 rounded-md cursor-pointer"
-              key={item.title}
+              key={opt.title}
+              onClick={() =>
+                setOptions((prev) =>
+                  prev.filter((item) => item.title !== opt.title)
+                )
+              }
             >
-              <span>{item.title}</span>
-              <span>{item.additionalPrice}</span>
+              <span>{opt.title}</span>
+              <span>{opt.additionalPrice}</span>
             </div>
           ))}
         </div>
