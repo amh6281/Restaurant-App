@@ -56,9 +56,30 @@ const AddPage = () => {
     });
   };
 
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+
+    try {
+      const res = await fetch("http://localhost:3000/api/products", {
+        method: "POST",
+        body: JSON.stringify({
+          ...inputs,
+          options,
+        }),
+      });
+      const data = await res.json();
+      // router.push(`/product/${data.id}`);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   return (
     <div>
-      <form className="shadow-lg flex flex-wrap gap-4 p-8">
+      <form
+        className="shadow-lg flex flex-wrap gap-4 p-8"
+        onSubmit={handleSubmit}
+      >
         <h1>상품 추가</h1>
         <div className="w-full flex flex-col gap-2">
           <label>제목</label>
@@ -92,7 +113,7 @@ const AddPage = () => {
             onChange={handleChange}
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="text"
-            name="category"
+            name="catSlug"
           />
         </div>
         <div className="w-full flex flex-col gap-2">
