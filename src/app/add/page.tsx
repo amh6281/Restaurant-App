@@ -30,6 +30,7 @@ const AddPage = () => {
   });
 
   const [options, setOptions] = useState<Option[]>([]);
+  const [file, setFile] = useState<FileList | null>();
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -88,6 +89,14 @@ const AddPage = () => {
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="text"
             name="title"
+          />
+        </div>
+        <div className="w-full flex flex-col gap-2">
+          <label>이미지</label>
+          <input
+            className="ring-1 ring-red-200 p-2 rounded-sm"
+            type="file"
+            onChange={(e) => setFile(e.target.files)}
           />
         </div>
         <div className="w-full flex flex-col gap-2">
