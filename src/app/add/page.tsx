@@ -30,7 +30,7 @@ const AddPage = () => {
   });
 
   const [options, setOptions] = useState<Option[]>([]);
-  const [file, setFile] = useState<FileList | null>();
+  const [file, setFile] = useState<File>();
 
   const { data: session, status } = useSession();
   const router = useRouter();
@@ -57,14 +57,39 @@ const AddPage = () => {
     });
   };
 
+  const handleChangeImg = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const target = e.target as HTMLInputElement;
+    const item = (target.files as FileList)[0];
+    setFile(item);
+  };
+
+  const upload = async () => {
+    const data = new FormData();
+    data.append("file", file!);
+    data.append("upload_preset", "Restaurant");
+
+    const res = await fetch(
+      "https://api.cloudinary.com/v1_1/dfiijzk7o/image/upload",
+      {
+        method: "POST",
+        headers: { "Content-Type": "multipart/form-data" },
+        body: data,
+      }
+    );
+    const resData = await res.json();
+    return resData.url;
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     try {
+      const url = await upload();
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
           ...inputs,
+          img: url,
           options,
         }),
       });
@@ -96,7 +121,7 @@ const AddPage = () => {
           <input
             className="ring-1 ring-red-200 p-2 rounded-sm"
             type="file"
-            onChange={(e) => setFile(e.target.files)}
+            onChange={handleChangeImg}
           />
         </div>
         <div className="w-full flex flex-col gap-2">
