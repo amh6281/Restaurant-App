@@ -94,24 +94,21 @@ const AddPage = () => {
         }),
       });
       const data = await res.json();
-      // router.push(`/product/${data.id}`);
+      router.push(`/product/${data.id}`);
     } catch (err) {
       console.log(err);
     }
   };
 
   return (
-    <div>
-      <form
-        className="shadow-lg flex flex-wrap gap-4 p-8"
-        onSubmit={handleSubmit}
-      >
-        <h1>상품 추가</h1>
+    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
+      <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
+        <h1 className="text-4xl mb-2 text-gray-300 font-bold">상품 추가</h1>
         <div className="w-full flex flex-col gap-2">
-          <label>제목</label>
+          <label className="text-sm">제목</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
             type="text"
             name="title"
           />
@@ -125,44 +122,45 @@ const AddPage = () => {
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>설명</label>
+          <label className="text-sm">설명</label>
           <textarea
+            rows={3}
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
             name="desc"
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>가격</label>
+          <label className="text-sm">가격</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
             type="number"
             name="price"
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>카테고리</label>
+          <label className="text-sm">카테고리</label>
           <input
             onChange={handleChange}
-            className="ring-1 ring-red-200 p-2 rounded-sm"
+            className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
             type="text"
             name="catSlug"
           />
         </div>
         <div className="w-full flex flex-col gap-2">
-          <label>옵션</label>
+          <label className="text-sm">옵션</label>
           <div>
             <input
               onChange={changeOption}
-              className="ring-1 ring-red-200 p-2 rounded-sm"
+              className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
               type="text"
               placeholder="Title"
               name="title"
             />
             <input
               onChange={changeOption}
-              className="ring-1 ring-red-200 p-2 rounded-sm"
+              className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
               type="number"
               placeholder="Additional Price"
               name="additionalPrice"
@@ -175,10 +173,10 @@ const AddPage = () => {
             추가
           </div>
         </div>
-        <div>
+        <div className="flex flex-wrap gap-4 mt-2">
           {options.map((opt) => (
             <div
-              className="ring-1 p-2 ring-red-500 rounded-md cursor-pointer"
+              className="p-2 rounded-md cursor-pointer bg-gray-200 text-gray-400"
               key={opt.title}
               onClick={() =>
                 setOptions((prev) =>
@@ -187,11 +185,14 @@ const AddPage = () => {
               }
             >
               <span>{opt.title}</span>
-              <span>{opt.additionalPrice}</span>
+              <span className="text-xs"> (+ {opt.additionalPrice})</span>
             </div>
           ))}
         </div>
-        <button type="submit" className="p-2 w-full bg-red-500 text-white">
+        <button
+          type="submit"
+          className="bg-red-500 p-4 text-white w-48 rounded-md relative h-14 flex items-center justify-center"
+        >
           추가
         </button>
       </form>
