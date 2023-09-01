@@ -1,6 +1,7 @@
 "use client";
 
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useRouter } from "next/navigation";
 import React, { useState } from "react";
 
@@ -104,6 +105,21 @@ const AddPage = () => {
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
         <h1 className="text-4xl mb-2 text-gray-300 font-bold">상품 추가</h1>
+        <div className="w-full flex flex-col gap-2 ">
+          <label
+            className="text-sm cursor-pointer flex gap-4 items-center"
+            htmlFor="file"
+          >
+            <Image src="/upload.png" alt="" width={30} height={20} />
+            <span>이미지 업로드</span>
+          </label>
+          <input
+            type="file"
+            onChange={handleChangeImg}
+            id="file"
+            className="hidden"
+          />
+        </div>
         <div className="w-full flex flex-col gap-2">
           <label className="text-sm">제목</label>
           <input
