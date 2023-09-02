@@ -73,7 +73,9 @@ const AddPage = () => {
       "https://api.cloudinary.com/v1_1/dfiijzk7o/image/upload",
       {
         method: "POST",
-        headers: { "Content-Type": "multipart/form-data" },
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
         body: data,
       }
     );
@@ -89,8 +91,8 @@ const AddPage = () => {
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
-          ...inputs,
           img: url,
+          ...inputs,
           options,
         }),
       });
@@ -102,7 +104,7 @@ const AddPage = () => {
   };
 
   return (
-    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-9rem)] flex items-center justify-center text-red-500">
+    <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] flex items-center justify-center text-red-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
         <h1 className="text-4xl mb-2 text-gray-300 font-bold">상품 추가</h1>
         <div className="w-full flex flex-col gap-2 ">
@@ -127,14 +129,6 @@ const AddPage = () => {
             className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
             type="text"
             name="title"
-          />
-        </div>
-        <div className="w-full flex flex-col gap-2">
-          <label>이미지</label>
-          <input
-            className="ring-1 ring-red-200 p-2 rounded-sm"
-            type="file"
-            onChange={handleChangeImg}
           />
         </div>
         <div className="w-full flex flex-col gap-2">
@@ -166,7 +160,7 @@ const AddPage = () => {
         </div>
         <div className="w-full flex flex-col gap-2">
           <label className="text-sm">옵션</label>
-          <div>
+          <div className="flex">
             <input
               onChange={changeOption}
               className="ring-1 ring-red-200 p-4 rounded-sm placeholder:text-red-200 outline-none"
@@ -181,29 +175,29 @@ const AddPage = () => {
               placeholder="Additional Price"
               name="additionalPrice"
             />
-          </div>
-          <div
-            className="w-52 bg-red-500 text-white p-2"
-            onClick={() => setOptions((prev) => [...prev, option])}
-          >
-            추가
-          </div>
-        </div>
-        <div className="flex flex-wrap gap-4 mt-2">
-          {options.map((opt) => (
-            <div
-              className="p-2 rounded-md cursor-pointer bg-gray-200 text-gray-400"
-              key={opt.title}
-              onClick={() =>
-                setOptions((prev) =>
-                  prev.filter((item) => item.title !== opt.title)
-                )
-              }
+            <button
+              className="bg-gray-500 p-2 text-white"
+              onClick={() => setOptions((prev) => [...prev, option])}
             >
-              <span>{opt.title}</span>
-              <span className="text-xs"> (+ {opt.additionalPrice})</span>
-            </div>
-          ))}
+              옵션 추가
+            </button>
+          </div>
+          <div className="flex flex-wrap gap-4 mt-2">
+            {options.map((opt) => (
+              <div
+                className="p-2 rounded-md cursor-pointer bg-gray-200 text-gray-400"
+                key={opt.title}
+                onClick={() =>
+                  setOptions((prev) =>
+                    prev.filter((item) => item.title !== opt.title)
+                  )
+                }
+              >
+                <span>{opt.title}</span>
+                <span className="text-xs"> (+ {opt.additionalPrice})</span>
+              </div>
+            ))}
+          </div>
         </div>
         <button
           type="submit"
