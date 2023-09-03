@@ -48,8 +48,14 @@ const AddPage = () => {
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
+    const { name, value } = e.target;
+
+    // price 필드인 경우 문자열을 숫자로 파싱하여 저장
     setInputs((prev) => {
-      return { ...prev, [e.target.name]: e.target.value };
+      return {
+        ...prev,
+        [name]: name === "price" ? parseInt(value, 10) : value, // 숫자로 파싱
+      };
     });
   };
 
@@ -68,28 +74,29 @@ const AddPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    if (!file) {
-      console.error("파일이 없습니다.");
-      return;
-    }
+    // if (!file) {
+    //   console.error("파일이 없습니다.");
+    //   return;
+    // }
 
     try {
-      const url = await upload(file);
+      // const url = await upload(file);
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
-          img: url,
+          // img: url,
           ...inputs,
           options,
         }),
       });
       const data = await res.json();
-      router.push(`/product/${data.id}`);
+      console.log(data);
+      // router.push(`/product/${data.id}`);
     } catch (err) {
       console.log(err);
     }
   };
-
+  console.log(inputs);
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] flex items-center justify-center text-red-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
