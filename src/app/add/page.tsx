@@ -95,7 +95,7 @@ const AddPage = () => {
       console.log(err);
     }
   };
-  console.log(options);
+
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] flex items-center justify-center text-red-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
