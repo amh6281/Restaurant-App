@@ -7,9 +7,6 @@ export const upload = async (file: File) => {
     "https://api.cloudinary.com/v1_1/dfiijzk7o/image/upload",
     {
       method: "POST",
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
       body: data,
     }
   );

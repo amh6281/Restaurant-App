@@ -74,29 +74,23 @@ const AddPage = () => {
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    // if (!file) {
-    //   console.error("파일이 없습니다.");
-    //   return;
-    // }
-
     try {
-      // const url = await upload(file);
+      const url = await upload(file!);
       const res = await fetch("http://localhost:3000/api/products", {
         method: "POST",
         body: JSON.stringify({
-          // img: url,
+          img: url,
           ...inputs,
           options,
         }),
       });
       const data = await res.json();
-      console.log(data);
-      // router.push(`/product/${data.id}`);
+      router.push(`/product/${data.id}`);
     } catch (err) {
       console.log(err);
     }
   };
-  console.log(inputs);
+
   return (
     <div className="p-4 lg:px-20 xl:px-40 h-[calc(100vh-6rem)] md:h-[calc(100vh-4rem)] flex items-center justify-center text-red-500">
       <form className="flex flex-wrap gap-6" onSubmit={handleSubmit}>
