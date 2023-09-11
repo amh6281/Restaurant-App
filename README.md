@@ -9,6 +9,11 @@
 > <b>해당 프로젝트는 레스토랑 및 음식 배달을 위해 구축되었으며 주요 기능으로는 상품 추가, 삭제, 배송 상태 변경,<br/>장바구니 추가, 상품 주문이 가능한 Restaurant App 입니다.</b>
 <br />
 
+<!-- 프로젝트 구조 -->
+## 💼 Project Structure
+<img src="https://github.com/amh6281/Restaurant-App/assets/83646986/a53a64d1-8ebb-47ab-b670-01c722227a89"/>
+<br />
+
 <!-- 기술 스택 -->
 ## 💪 Skills
 <img src="https://img.shields.io/badge/TypeScript-007ACC?style=for-the-badge&logo=typescript&logoColor=white"/> <img src="https://img.shields.io/badge/next%20js-000000?style=for-the-badge&logo=nextdotjs&logoColor=white"/>
