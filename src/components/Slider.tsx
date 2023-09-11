@@ -29,7 +29,7 @@ const Slider = () => {
     const interval = setInterval(() => {
       setCurrentSlide((prev) => (prev === data.length - 1 ? 0 : prev + 1));
     }, 2000);
-    // 메모리 누스를 막기 위한 생명주기 끝나는 시점에 interval 종료
+    // 메모리 누수를 막기 위한 생명주기 끝나는 시점에 interval 종료
     return () => clearInterval(interval);
   }, []);
 

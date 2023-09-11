@@ -31,7 +31,7 @@ const CategoryPage = async ({ params }: Props) => {
           href={`/product/${item.id}`}
           key={item.id}
         >
-          {/* IImage Container */}
+          {/* Image Container */}
           {item.img && (
             <div className="relative h-[80%]">
               <Image src={item.img} alt="" fill className="object-contain" />
